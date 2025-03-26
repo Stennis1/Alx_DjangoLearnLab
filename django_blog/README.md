@@ -3,14 +3,6 @@
 
 This authentication system provides user registration, login, logout, and profile management for the Django blog project.  
 
-## **Features**
-- 🔐 User registration with email validation  
-- 🛠️ User login/logout using Django’s built-in authentication system  
-- 👤 Profile management (view and update email)  
-- 🔒 Secure authentication with CSRF protection and password hashing  
-
----
-
 ## **Installation and Setup**
 ### **1. Clone the Repository**
 ```bash
@@ -50,25 +42,6 @@ Visit `http://127.0.0.1:8000/` in your browser.
 
 ---
 
-## **Usage Guide**
-### **User Registration**
-1. Go to `/register/`
-2. Fill in the registration form (username, email, password)
-3. Submit the form to create an account
-
-### **User Login**
-1. Visit `/login/`
-2. Enter your credentials and log in
-
-### **User Logout**
-1. Click the logout button or visit `/logout/`
-
-### **Profile Management**
-1. Log in and visit `/profile/`
-2. View or update your email address
-
----
-
 ## **Authentication URLs**
 | URL Path   | Description |
 |------------|-------------|
@@ -82,7 +55,6 @@ Visit `http://127.0.0.1:8000/` in your browser.
 ## **Security Measures**
 - ✅ **CSRF Protection**: All forms include CSRF tokens to prevent CSRF attacks  
 - 🔑 **Password Hashing**: Django’s built-in password hashing ensures secure storage  
-- 🔒 **Login Required**: Profile management is protected with `@login_required`  
 
 ---
 
@@ -99,17 +71,4 @@ Visit `http://127.0.0.1:8000/` in your browser.
 
 **3. "Page Not Found (404)" for `/login/`, `/register/`, etc.**  
 - Ensure URLs are correctly defined in `urls.py`  
-
----
-
-## **Contributing**
-1. Fork the repository  
-2. Create a feature branch: `git checkout -b feature-new-auth-functionality`  
-3. Commit changes: `git commit -m "Added new authentication feature"`  
-4. Push to the branch: `git push origin feature-new-auth-functionality`  
-5. Open a pull request  
-
----
-
-## **License**
-This project is open-source under the [MIT License](LICENSE).  
+--- 
