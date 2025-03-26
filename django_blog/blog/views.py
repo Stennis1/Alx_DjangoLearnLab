@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import CustomUserCreateForm, PostForm, CommentForm
 from django.shortcuts import render, redirect, get_object_or_404
+from .forms import CustomUserCreateForm, PostForm, CommentForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -24,6 +25,7 @@ def register(request):
 
 
 # Profile required
+@login_required
 def profile(request):
     if request.method == 'POST':
         user = request.user
