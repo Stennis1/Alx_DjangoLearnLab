@@ -7,6 +7,8 @@ from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Post, Comment
+from django.db.models import Q
+from taggit.models import Tag
 
 # Create your views here.
 # View to handle registration and login
@@ -127,3 +129,27 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def test_func(self):
         return self.request.user == self.get_object().author
+    
+def search_posts(request):
+    query = request.GET.get('q', '')
+    posts = Post.objects.filter(
+        Q(title__icontains=query) |
+        Q(content__icontains=query) |
+        Q(tags__name__icontains=query)
+    ).distinct()
+
+    return render(request, 'blog/search_results.html', {'query': query, 'posts': posts})
+
+class TaggedPostListView(ListView):
+    model = Post
+    template_name = 'blog/tagged_posts.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, slug=self.kwargs['tag'])
+        return Post.objects.filter(tags=tag)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.kwargs['tag']
+        return context
